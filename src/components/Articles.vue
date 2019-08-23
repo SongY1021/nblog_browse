@@ -20,7 +20,7 @@
           <div class="title-right">
             <ul class="toolbar_menu">
               <li class="toolbar_item">
-                <el-input placeholder="请输入内容" clearable="true">
+                <el-input placeholder="请输入内容" clearable v-model="keywords">
                   <i slot="suffix" class="el-input__icon el-icon-search"></i>
                 </el-input>
               </li>
@@ -56,7 +56,110 @@
         </el-col>
       </el-row>
     </el-header>
-    <el-main>Main</el-main>
+    <el-main>
+      <el-row justify="center" type="flex" :gutter="10">
+        <el-col :lg="2" :md="3" :sm="3" :xs="3">
+          <div class="content-menu">
+            <ul class="toolbar_menu">
+              <li class="toolbar_item active">
+                <a href="javascript:;" class="box_item">
+                  推荐
+                </a>
+              </li>
+              <li class="toolbar_item">
+                <a href="javascript:;" class="box_item">
+                  关注
+                </a>
+              </li>
+              <li class="toolbar_item">
+                <a href="javascript:;" class="box_item">
+                  Java
+                </a>
+              </li>
+              <li class="toolbar_item">
+                <a href="javascript:;" class="box_item">
+                  Python
+                </a>
+              </li>
+              <li class="toolbar_item">
+                <a href="javascript:;" class="box_item">
+                  C/C++
+                </a>
+              </li>
+              <li class="toolbar_item">
+                <a href="javascript:;" class="box_item">
+                  前端
+                </a>
+              </li>
+              <li class="toolbar_item">
+                <a href="javascript:;" class="box_item">
+                  架构
+                </a>
+              </li>
+              <li class="toolbar_item">
+                <a href="javascript:;" class="box_item">
+                  区块链
+                </a>
+              </li>
+              <li class="toolbar_item">
+                <a href="javascript:;" class="box_item">
+                  数据库
+                </a>
+              </li>
+              <li class="toolbar_item">
+                <a href="javascript:;" class="box_item">
+                  人工智能
+                </a>
+              </li>
+              <li class="toolbar_item">
+                <a href="javascript:;" class="box_item">
+                  云计算/大数据
+                </a>
+              </li>
+            </ul>
+          </div>
+        </el-col>
+        <el-col :lg="11" :md="16" :sm="16" :xs="16">
+          <div class="content">
+            <el-row class="content-banner" :gutter="2">
+              <el-col :span="16" class="content-banner-col">
+                <div class="banner">
+                  <el-carousel :interval="5000" arrow="hover" height="304px">
+                    <el-carousel-item v-for="item in 4" :key="item">
+                      <h3>{{ item }}</h3>
+                    </el-carousel-item>
+                  </el-carousel>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <el-row>
+                  <el-col :span="24" class="content-banner-right">
+                    <el-image :src="src1">
+                      <div slot="placeholder" class="image-slot">
+                        加载中<span class="dot">...</span>
+                      </div>
+                    </el-image>
+                  </el-col>
+                  <el-col :span="24" class="content-banner-right">
+                    <el-image :src="src2">
+                      <div slot="placeholder" class="image-slot">
+                        加载中<span class="dot">...</span>
+                      </div>
+                    </el-image>
+                  </el-col>
+                </el-row>
+              </el-col>
+            </el-row>
+            <el-alert title="您有新的推荐内容，请点击查看" type="error" effect="dark"></el-alert>
+          </div>
+        </el-col>
+        <el-col :lg="5" :md="5" :sm="5" :xs="5">
+          <div class="content-bar">
+            <div class="tip">今日推荐</div>
+          </div>
+        </el-col>
+      </el-row>
+    </el-main>
   </el-container>
 </template>
 
@@ -65,7 +168,10 @@ export default {
   data () {
     return {
       activeIndex: '1',
-      isLogin: true
+      isLogin: true,
+      keywords: '',
+      src1: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+      src2: 'https://csdnimg.cn/feed/20190822/38b4e488f6082aa4f71596cc04cd49d6.png'
     }
   },
   methods: {
@@ -80,6 +186,7 @@ export default {
   .el-container {
     width: 100%;
     height: 100%;
+    min-width: 1190px;
     position: absolute;
   }
   .el-header {
@@ -94,9 +201,10 @@ export default {
   }
   .el-main {
     height: 100%;
-    /*background-color: #E9EEF3;*/
+    min-width: 1190px;
     color: #333;
     text-align: center;
+    padding: 20px 10px 0;
   }
   .grid-content {
     border-radius: 4px;
@@ -118,7 +226,7 @@ export default {
   .headerWrapper .title-logo{
     display: block;
     float: left;
-
+    margin-left: 10px;
   }
   .headerWrapper .title-left{
     text-align: left;
@@ -170,7 +278,6 @@ export default {
   }
   .headerWrapper .toolbar_menu .toolbar_item a{
     text-decoration: none;
-    /*color: #606266;*/
     color: #909399;
   }
   .headerWrapper .toolbar_menu .toolbar_item a:hover{
@@ -181,5 +288,110 @@ export default {
   }
   .headerWrapper .toolbar_menu .toolbar_item .el-input__inner{
     height: 30px;
+  }
+  .el-main .el-row {
+    height: 100%;
+  }
+  .el-main .content-menu{
+    position: relative;
+    height: 100%;
+  }
+  .content-menu .toolbar_menu{
+    list-style: none;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    margin: 0;
+    padding-left: 0;
+    z-index: 20;
+  }
+  .content-menu .toolbar_menu .toolbar_item{
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    border-bottom: #FFF solid 1px;
+    border-radius: 4px;
+    margin: 0;
+    /*border-top: 2px solid transparent;*/
+    color: #909399;
+    font-size: 14px;
+    /*padding: 0 20px;*/
+    cursor: pointer;
+    -webkit-transition: border-color .3s,background-color .3s,color .3s;
+    -o-transition: border-color .3s,background-color .3s,color .3s;
+    transition: border-color .3s,background-color .3s,color .3s;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .content-menu .toolbar_menu .toolbar_item .box_item{
+    display: inline-block;
+    padding: 0 10px;
+  }
+  .content-menu .toolbar_menu .toolbar_item a{
+    text-decoration: none;
+    color: #606266;
+  }
+  .content-menu .toolbar_menu li:hover a,.content-menu .toolbar_menu .active a{
+    color: #FFFFFF;
+  }
+  .content-menu .toolbar_menu li:hover, .content-menu .toolbar_menu .active{
+    color: #FFFFFF;
+    background-color: #409EFF;
+  }
+  .el-main .content{
+    height: 100%;
+  }
+  .content .content-banner{
+    height: 304px;
+  }
+  .content .content-banner .content-banner-col{
+    height: 100%;
+  }
+  .content .content-banner .banner{
+    height: 100%;
+  }
+  .content .el-carousel__item h3 {
+    padding: 2px 0;
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
+  }
+
+  .content .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  .content .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+  .content .el-image{
+    width: 100%;
+    height: 150px;
+    background-color: #409EFF;
+  }
+  .content .content-banner-right{
+    padding: 1px;
+    height: 152px;
+  }
+  .content .content-remind {
+    margin-top: 15px;
+  }
+  .content .el-alert {
+    margin-top: 15px;
+  }
+  .el-main .content-bar{
+    height: 100%;
+    /*min-width: 300px;*/
+  }
+  .content-bar .tip {
+    /*padding: 0.5px 4px;*/
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    background-color: #ecf8ff;
+    border-radius: 4px;
+    border-left: 5px solid #409EFF;
   }
 </style>
